@@ -7,34 +7,54 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>The Best Game</title>
   <link rel="stylesheet" href="./style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.js"></script>
   <script defer src="./logic.js"></script>
 </head>
 
 <body>
   <div class="container">
-    <div class="title">
-      <h1>Know your</h1>
-      <h1>Geo!</h1>
+    <nav class="nav">
+      <div class="title">
+        <h1>Know your Geo!</h1>
+      </div>
+      <div id="new_game">
+        <button id="new_G">Play New Game</button>
+      </div>
+    </nav>
+    <div class="player">
+      <h3 id="player">Player 1</h3>
     </div>
-    <div id="new_game">
-      <button id="new_G">Play New Game</button>
-    </div>
-    <div class="flag">
-    </div>
-    <div class="country">
-      <h3 id="countryId">
-      </h3>
-    </div>
-    <div class="cap">
-      <h3 id="capitalId">
-      </h3>
-    </div>
-    <div class="capital">
-      <form action="" method="get">
-        <label for="GET capital">Capital:</label>
-        <input type="text" name="capital" id="insert_capital">
-        <input type="submit" id="rightChoice">
-      </form>
+    <div class="gameContainer">
+      <div class="score">
+        <h5>Score Player 1</h5>
+        <h6 id="score1"></h6>
+      </div>
+      <div class="capitalContainer">
+        <div class="cap">
+          <h3 id="capitalId">
+          </h3>
+        </div>
+        <div class="country">
+          <h3 id="countryId">
+          </h3>
+        </div>
+        <div class="capital">
+          <form action="" method="get" id="form">
+            <label for="GET capital">Capital:</label>
+            <input type="text" name="capital" id="insert_capital">
+            <input type="submit" id="rightChoice">
+            <button id="idk"> I have no clue</button>
+          </form>
+        </div>
+        <div id="outcome">
+          <h4>
+          </h4>
+        </div>
+      </div>
+      <div class="score">
+        <h5>Score Player 2</h5>
+        <h6 id="score2"></h6>
+      </div>
     </div>
   </div>
 </body>
