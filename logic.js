@@ -124,6 +124,7 @@ idk.onclick = function(e) {
   } else if (players.innerText == "Player 2") {
     players.innerText = "Player 1";
   }
+  outcome.innerText = "You know not to know";
   presentCountry();
   startTimer();
   makeItBeat();
