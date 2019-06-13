@@ -162,6 +162,9 @@ function isCorrect() {
   ) {
     outcome.innerText = makeAnInsult();
     laugh.play();
+    presentCountry();
+    solution.innerText =
+      "The capital of " + theCountry + " is: " + stringToGuess.toUpperCase();
     players.innerText = "Player 2";
     makeItBeat();
   } else if (
@@ -227,7 +230,7 @@ function timeIsUp() {
 const container = document.getElementById("gameContainer");
 
 function checkWinner() {
-  if (score1 == 1) {
+  if (score1 == 5) {
     timeSound.pause();
     celebration.play();
     players.removeChild(players.firstChild);
@@ -242,7 +245,7 @@ function checkWinner() {
     container.appendChild(div2);
     timeIsUp();
     stopTimer();
-  } else if (score2 == 1) {
+  } else if (score2 == 5) {
     timeSound.pause();
     celebration.play();
     players.removeChild(players.firstChild);
