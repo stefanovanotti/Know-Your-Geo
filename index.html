@@ -18,11 +18,15 @@
         <h1>Know your Geo!</h1>
       </div>
       <div id="new_game">
-        <button id="new_G">Play New Game</button>
+        <button id="new_G" class="timer-btn">Play New Game</button>
       </div>
     </nav>
-    <div class="player">
-      <h3 id="player">Player 1</h3>
+    <div class="top_container">
+      <div class="player">
+        <h3 id="player">Player 1</h3>
+      </div>
+      <div id="timer">
+      </div>
     </div>
     <div class="gameContainer">
       <div class="score">
@@ -42,8 +46,8 @@
           <form action="" method="get" id="form">
             <label for="GET capital">Capital:</label>
             <input type="text" name="capital" id="insert_capital">
-            <input type="submit" id="rightChoice">
-            <button id="idk"> I have no clue</button>
+            <input type="submit" id="rightChoice" class="timer-btn">
+            <button id="idk" class="timer-btn"> I have no clue</button>
           </form>
         </div>
         <div id="outcome">
@@ -56,6 +60,9 @@
         <h6 id="score2"></h6>
       </div>
     </div>
+  </div>
+  <div id="bg">
+    <img src="./images/earth-map-summer-july-87652.jpeg" alt="">
   </div>
 </body>
 

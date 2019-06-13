@@ -4,7 +4,6 @@ body {
   font-family: "Pragati Narrow", sans-serif;
 
   margin: 0;
-  background: #488256;
   color: #ffb219;
   text-align: center;
 }
@@ -12,6 +11,8 @@ body {
 .container {
   width: 90%;
   margin: 50px auto;
+  z-index: 2;
+  position: relative;
 }
 
 h1 {
@@ -81,6 +82,7 @@ h1 {
 #idk {
   align-self: center;
   margin: 20px;
+  border: 0;
 }
 
 #idk {
@@ -90,7 +92,34 @@ h1 {
 }
 
 #rightChoice {
-  background-color: chartreuse;
+  background-color: rgb(19, 197, 123);
   color: #ffb219;
   font-size: 18px;
+}
+
+.top_container {
+  display: flex;
+  flex-direction: column;
+}
+
+#timer {
+  font-size: 50px;
+}
+
+#bg {
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+}
+#bg img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  min-width: 50%;
+  min-height: 50%;
 }

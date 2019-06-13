@@ -16,7 +16,6 @@ btn.onclick = function() {
   presentCountry();
   scoreplayer1.innerText = 0;
   scoreplayer2.innerText = 0;
-  startTimer();
   // zeroTimer();
 };
 
@@ -29,10 +28,9 @@ const guessbtn = document.getElementById("rightChoice");
 var getValue = () => {
   guessbtn.onclick = function(evt) {
     evt.preventDefault();
-    stopTimer();
     console.log(guess.value);
     isCorrect();
-    startTimer();
+    // zeroTimer();
     console.log(score1);
     scoreplayer1.innerText = score1;
     scoreplayer2.innerText = score2;
@@ -77,21 +75,12 @@ insults = [
 //   timerStartElements[i].onclick = startTimer;
 // }
 var displayTimer = document.getElementById("timer");
-var count = 19;
+var count = 9;
 var timer;
-
-function stopTimer() {
-  count = 19;
-  displayTimer.textContent = count;
-  window.clearInterval(timer);
-}
 
 function startTimer() {
   timer = setInterval(() => {
     displayTimer.innerText = count--;
-    if (count <= 0) {
-      timeIsUp();
-    }
   }, 1000);
 
   // timeoutID = window.setTimeout(() => {
@@ -115,14 +104,7 @@ function startTimer() {
 // no clue event
 idk.onclick = function(e) {
   e.preventDefault();
-  stopTimer();
-  if (players.innerText == "Player 1") {
-    players.innerText = "Player 2";
-  } else if (players.innerText == "Player 2") {
-    players.innerText = "Player 1";
-  }
   presentCountry();
-  startTimer();
 };
 
 function isCorrect() {
@@ -273,18 +255,26 @@ countries = [
 ];
 
 function timeIsUp() {
-  stopTimer();
-  outcome.innerText = "Time's up!";
-  if (players.innerText == "Player 1") {
-    players.innerText = "Player 2";
-  } else if (players.innerText == "Player 2") {
-    players.innerText = "Player 1";
+  if (displayTimer.innerText === "0") {
+    presentCountry();
+    clearInterval(timer);
+    count = 9;
+    othertimer2 = setInterval(() => {
+      displayTimer.innerText = count--;
+    }, 1000);
+
+    timeoutID = window.setTimeout(() => {
+      clearInterval(othertimer2);
+    }, 10000);
+    outcome.innerText = "Time's up!";
+    if (players.innerText == "Player 1") {
+      players.innerText = "Player 2";
+    } else if (players.innerText == "Player 2") {
+      players.innerText = "Player 1";
+    }
   }
-  presentCountry();
-  startTimer();
-  // }
 }
 
-// setInterval(() => {
-//   timeIsUp();
-// }, 2000);
+setInterval(() => {
+  timeIsUp();
+}, 2000);
