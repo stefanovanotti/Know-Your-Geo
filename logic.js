@@ -13,11 +13,12 @@ function presentCountry() {
 const btn = document.getElementById("new_G");
 //start game onclick
 btn.onclick = function() {
+  stopTimer();
   presentCountry();
   scoreplayer1.innerText = 0;
   scoreplayer2.innerText = 0;
   startTimer();
-  // zeroTimer();
+  makeItBeat();
 };
 
 const idk = document.getElementById("idk");
@@ -34,6 +35,7 @@ var getValue = () => {
     isCorrect();
     startTimer();
     console.log(score1);
+    console.log(score2);
     scoreplayer1.innerText = score1;
     scoreplayer2.innerText = score2;
   };
@@ -87,6 +89,7 @@ function stopTimer() {
 }
 
 function startTimer() {
+  timeSound.play();
   timer = setInterval(() => {
     displayTimer.innerText = count--;
     if (count <= 0) {
@@ -123,6 +126,7 @@ idk.onclick = function(e) {
   }
   presentCountry();
   startTimer();
+  makeItBeat();
 };
 
 function isCorrect() {
@@ -141,6 +145,7 @@ function isCorrect() {
     outcome.innerText = makeACompliment();
     score1++;
     presentCountry();
+    checkWinner();
   } else if (
     guess.value.toLowerCase() == stringToGuess &&
     players.innerText == "Player 2"
@@ -148,21 +153,26 @@ function isCorrect() {
     outcome.innerText = makeACompliment();
     score2++;
     presentCountry();
+    checkWinner();
   } else if (
     guess.value.toLowerCase() !== stringToGuess &&
     players.innerText == "Player 1"
   ) {
     outcome.innerText = makeAnInsult();
+    laugh.play();
     players.innerText = "Player 2";
+    makeItBeat();
   } else if (
     guess.value.toLowerCase() !== stringToGuess &&
     players.innerText == "Player 2"
   ) {
     outcome.innerText = makeAnInsult();
+    laugh2.play();
     solution.innerText =
       "The capital of " + theCountry + " is: " + stringToGuess.toUpperCase();
     presentCountry();
     players.innerText = "Player 1";
+    makeItBeat();
   }
 
   function makeACompliment() {
@@ -176,6 +186,23 @@ function isCorrect() {
     var randomInsult = insults[Math.floor(Math.random() * insults.length)];
     console.log(randomInsult);
     return randomInsult;
+  }
+}
+
+function makeItBeat() {
+  // players.remove();
+  // players = document.createElement("h3");
+  // players.classList.add("heartBeat");
+  // players.textContent = "randomtest";
+  // const parent = document.getElementById("parentplayer");
+  // parent.appendChild(players);
+
+  if (players.classList.contains("heartBeat")) {
+    players.classList.remove("heartBeat");
+    players.classList.add("heartBeat2");
+  } else if (players.classList.contains("heartBeat2")) {
+    players.classList.remove("heartBeat2");
+    players.classList.add("heartBeat");
   }
 }
 
@@ -288,3 +315,40 @@ function timeIsUp() {
 // setInterval(() => {
 //   timeIsUp();
 // }, 2000);
+const container = document.getElementById("gameContainer");
+
+function checkWinner() {
+  if (score1 == 1) {
+    players.removeChild(players.firstChild);
+    console.log("Player 1, You Know your Geo!");
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+    var div2 = document.createElement("div"); //create a new div
+    div2.innerHTML =
+      "<h1 class = heartBeat , id = winner1 >Player 1, You Know your Geo!</h1>";
+
+    container.appendChild(div2);
+    timeIsUp();
+    stopTimer();
+    timeSound.pause();
+  } else if (score2 == 1) {
+    players.removeChild(players.firstChild);
+    console.log("Player 2, You Know your Geo!");
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+    var div2 = document.createElement("div"); //create a new div
+    div2.innerHTML =
+      "<h1 class = heartBeat , id = winner1 >Player 2, You Know your Geo!</h1>";
+
+    container.appendChild(div2);
+    timeIsUp();
+    stopTimer();
+    timeSound.pause();
+  }
+}
+
+var laugh = new Audio("./sounds/457.mp3");
+var laugh2 = new Audio("./sounds/21879.mp3");
+var timeSound = new Audio("./sounds/3265.mp3");
