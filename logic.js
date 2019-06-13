@@ -143,6 +143,7 @@ function isCorrect() {
     players.innerText == "Player 1"
   ) {
     outcome.innerText = makeACompliment();
+    claps1.play();
     score1++;
     presentCountry();
     checkWinner();
@@ -151,6 +152,7 @@ function isCorrect() {
     players.innerText == "Player 2"
   ) {
     outcome.innerText = makeACompliment();
+    claps2.play();
     score2++;
     presentCountry();
     checkWinner();
@@ -205,6 +207,65 @@ function makeItBeat() {
     players.classList.add("heartBeat");
   }
 }
+
+function timeIsUp() {
+  stopTimer();
+  outcome.innerText = "Time's up!";
+  if (players.innerText == "Player 1") {
+    players.innerText = "Player 2";
+  } else if (players.innerText == "Player 2") {
+    players.innerText = "Player 1";
+  }
+  presentCountry();
+  startTimer();
+  // }
+}
+
+// setInterval(() => {
+//   timeIsUp();
+// }, 2000);
+const container = document.getElementById("gameContainer");
+
+function checkWinner() {
+  if (score1 == 1) {
+    timeSound.pause();
+    celebration.play();
+    players.removeChild(players.firstChild);
+    console.log("Player 1, You Know your Geo!");
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+    var div2 = document.createElement("div"); //create a new div
+    div2.innerHTML =
+      "<h1 class = heartBeat , id = winner1 >Player 1, You Know your Geo!</h1>";
+
+    container.appendChild(div2);
+    timeIsUp();
+    stopTimer();
+  } else if (score2 == 1) {
+    timeSound.pause();
+    celebration.play();
+    players.removeChild(players.firstChild);
+    console.log("Player 2, You Know your Geo!");
+    while (container.firstChild) {
+      container.removeChild(container.firstChild);
+    }
+    var div2 = document.createElement("div"); //create a new div
+    div2.innerHTML =
+      "<h1 class = heartBeat , id = winner1 >Player 2, You Know your Geo!</h1>";
+
+    container.appendChild(div2);
+    timeIsUp();
+    stopTimer();
+  }
+}
+
+var laugh2 = new Audio("./sounds/21879.mp3");
+var laugh = new Audio("./sounds/22493.mp3");
+var timeSound = new Audio("./sounds/3265.mp3");
+var claps1 = new Audio("./sounds/1480.mp3");
+var claps2 = new Audio("./sounds/3663.mp3");
+var celebration = new Audio("./sounds/Horay.mp3");
 
 countries = [
   { name: "Albania", capital: "Tirana" },
@@ -298,57 +359,3 @@ countries = [
   { name: "Viet Nam", capital: "Hanoi" },
   { name: "Zimbabwe", capital: "Harare" }
 ];
-
-function timeIsUp() {
-  stopTimer();
-  outcome.innerText = "Time's up!";
-  if (players.innerText == "Player 1") {
-    players.innerText = "Player 2";
-  } else if (players.innerText == "Player 2") {
-    players.innerText = "Player 1";
-  }
-  presentCountry();
-  startTimer();
-  // }
-}
-
-// setInterval(() => {
-//   timeIsUp();
-// }, 2000);
-const container = document.getElementById("gameContainer");
-
-function checkWinner() {
-  if (score1 == 1) {
-    players.removeChild(players.firstChild);
-    console.log("Player 1, You Know your Geo!");
-    while (container.firstChild) {
-      container.removeChild(container.firstChild);
-    }
-    var div2 = document.createElement("div"); //create a new div
-    div2.innerHTML =
-      "<h1 class = heartBeat , id = winner1 >Player 1, You Know your Geo!</h1>";
-
-    container.appendChild(div2);
-    timeIsUp();
-    stopTimer();
-    timeSound.pause();
-  } else if (score2 == 1) {
-    players.removeChild(players.firstChild);
-    console.log("Player 2, You Know your Geo!");
-    while (container.firstChild) {
-      container.removeChild(container.firstChild);
-    }
-    var div2 = document.createElement("div"); //create a new div
-    div2.innerHTML =
-      "<h1 class = heartBeat , id = winner1 >Player 2, You Know your Geo!</h1>";
-
-    container.appendChild(div2);
-    timeIsUp();
-    stopTimer();
-    timeSound.pause();
-  }
-}
-
-var laugh = new Audio("./sounds/457.mp3");
-var laugh2 = new Audio("./sounds/21879.mp3");
-var timeSound = new Audio("./sounds/3265.mp3");
